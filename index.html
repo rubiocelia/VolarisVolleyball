@@ -1,14 +1,403 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Volaris Volleyball</title>
+    <title>Volaris Volleyball · Club de voleibol</title>
+    <meta name="description"
+        content="Club de voleibol con escuela y equipos de competición desde los 8 años. Inscripciones abiertas para la temporada 2026–27.">
+    <meta name="theme-color" content="#0b1220">
+
+    <!-- Tipografía -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,800;1,800&display=swap"
+        rel="stylesheet">
+
+    <!-- La foto de portada se pide antes que nada: es lo primero que se ve -->
+    <link rel="preload" as="image" href="img/hero.webp">
+
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
+    <a href="#contenido" class="skip-link">Saltar al contenido</a>
+
+    <!-- ===========================
+         CABECERA
+    ============================ -->
+    <header class="header">
+        <div class="container header-inner">
+
+            <a href="#inicio" class="logo-link" aria-label="Volaris Volleyball, ir al inicio">
+                <img src="img/logo.png" alt="" class="logo" width="500" height="129">
+            </a>
+
+            <button class="menu-btn" aria-expanded="false" aria-controls="menu">
+                <span class="menu-btn-line"></span>
+                <span class="visually-hidden">Abrir menú</span>
+            </button>
+
+            <nav class="nav" id="menu" aria-label="Principal">
+                <a href="#club">El club</a>
+                <a href="#equipos">Equipos</a>
+                <a href="#horarios">Horarios</a>
+                <a href="#precios">Precios</a>
+                <a href="#inscripcion" class="btn btn-small">Inscríbete</a>
+            </nav>
+
+        </div>
+    </header>
+
+    <main id="contenido">
+
+        <!-- ===========================
+             PORTADA
+        ============================ -->
+        <section class="hero" id="inicio">
+            <div class="container hero-inner">
+
+                <p class="hero-badge">Inscripciones abiertas · Temporada 2026–27</p>
+
+                <h1 class="hero-title">
+                    Saltamos juntos,
+                    <span>ganamos juntos.</span>
+                </h1>
+
+                <p class="hero-lead">
+                    Escuela y equipos de competición desde los 8 años. Ven a probar una clase gratis
+                    y descubre la energía Volaris.
+                </p>
+
+                <div class="hero-actions">
+                    <a href="#inscripcion" class="btn">Reserva tu clase gratis</a>
+                    <a href="#categoria" class="btn btn-ghost">¿En qué categoría juego?</a>
+                </div>
+
+            </div>
+
+            <!-- Cifras del club -->
+            <div class="container">
+                <ul class="stats">
+                    <li><strong>312</strong> jugadores</li>
+                    <li><strong>18</strong> equipos</li>
+                    <li><strong>14</strong> entrenadores titulados</li>
+                    <li><strong>2009</strong> año de fundación</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- ===========================
+             BUSCADOR DE CATEGORÍA
+             Responde la duda que más llega al club:
+             "¿mi hijo/a en qué equipo entraría?"
+        ============================ -->
+        <section class="finder" id="categoria">
+            <div class="container finder-inner">
+
+                <div>
+                    <p class="eyebrow">En 5 segundos</p>
+                    <h2 class="section-title">¿En qué categoría juega?</h2>
+                    <p>
+                        La categoría depende del año de nacimiento. Elige el año y te decimos su equipo,
+                        sus días de entrenamiento y lo que cuesta.
+                    </p>
+                </div>
+
+                <form class="finder-form" id="finder-form">
+                    <label for="birth-year">Año de nacimiento</label>
+                    <select id="birth-year" name="birth-year">
+                        <option value="">Elige un año</option>
+                    </select>
+
+                    <!-- Aquí escribe el JS el resultado. aria-live hace que el lector de pantalla lo lea -->
+                    <div class="finder-result" id="finder-result" aria-live="polite"></div>
+                </form>
+
+            </div>
+        </section>
+
+        <!-- ===========================
+             EQUIPOS
+        ============================ -->
+        <section class="section" id="equipos">
+            <div class="container">
+
+                <p class="eyebrow">Equipos</p>
+                <h2 class="section-title">Escuela o competición</h2>
+                <p class="section-lead">
+                    Los más pequeños empiezan en la escuela, aprendiendo jugando. A partir de infantil, cada
+                    jugador elige: seguir en la escuela o entrar en un equipo federado.
+                </p>
+
+                <div class="paths">
+
+                    <article class="path">
+                        <h3>Escuela</h3>
+                        <p class="path-ages">De 8 a 12 años · Benjamín y alevín</p>
+                        <ul>
+                            <li>2 entrenamientos a la semana de 1 hora</li>
+                            <li>Minivoley y juegos para aprender la técnica</li>
+                            <li>Encuentros amistosos un sábado al mes</li>
+                        </ul>
+                    </article>
+
+                    <article class="path path-featured">
+                        <h3>Competición</h3>
+                        <p class="path-ages">Desde 12 años · Infantil a sénior</p>
+                        <ul>
+                            <li>3 entrenamientos a la semana de 1 h 30 min</li>
+                            <li>Liga federada y partidos el fin de semana</li>
+                            <li>Preparación física y vídeo de partidos</li>
+                        </ul>
+                    </article>
+
+                </div>
+
+                <!-- Categorías: se rellenan con los mismos datos que usa el buscador -->
+                <div class="teams" id="teams-list"></div>
+
+            </div>
+        </section>
+
+        <!-- ===========================
+             HORARIOS Y SEDES
+        ============================ -->
+        <section class="section section-light" id="horarios">
+            <div class="container">
+
+                <p class="eyebrow">Horarios</p>
+                <h2 class="section-title">Cuándo y dónde entrenamos</h2>
+
+                <div class="table-wrap">
+                    <table class="table">
+                        <caption class="visually-hidden">Horarios de entrenamiento por categoría</caption>
+                        <thead>
+                            <tr>
+                                <th scope="col">Categoría</th>
+                                <th scope="col">Días</th>
+                                <th scope="col">Hora</th>
+                                <th scope="col">Sede</th>
+                            </tr>
+                        </thead>
+                        <tbody id="schedule-body"></tbody>
+                    </table>
+                </div>
+
+                <div class="venues">
+                    <article class="venue">
+                        <h3>Pabellón Los Álamos</h3>
+                        <p>Avenida de los Deportes, 12</p>
+                        <p>Pista central y gimnasio. Parking gratuito.</p>
+                    </article>
+                    <article class="venue">
+                        <h3>Polideportivo Río Claro</h3>
+                        <p>Calle del Molino, 4</p>
+                        <p>Dos pistas. A 5 minutos de la parada de autobús 12.</p>
+                    </article>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ===========================
+             PRECIOS
+        ============================ -->
+        <section class="section" id="precios">
+            <div class="container">
+
+                <p class="eyebrow">Precios</p>
+                <h2 class="section-title">Cuotas 2026–27</h2>
+                <p class="section-lead">
+                    Una cuota mensual de septiembre a junio, sin sorpresas. La matrícula se paga una vez y
+                    ya incluye la equipación.
+                </p>
+
+                <div class="prices">
+
+                    <article class="price">
+                        <h3>Escuela</h3>
+                        <p class="price-amount"><strong>35 €</strong>/mes</p>
+                        <p>Benjamín y alevín</p>
+                    </article>
+
+                    <article class="price price-featured">
+                        <h3>Competición</h3>
+                        <p class="price-amount"><strong>45 €</strong>/mes</p>
+                        <p>Infantil, cadete, juvenil y júnior</p>
+                    </article>
+
+                    <article class="price">
+                        <h3>Sénior</h3>
+                        <p class="price-amount"><strong>50 €</strong>/mes</p>
+                        <p>Equipos absolutos</p>
+                    </article>
+
+                </div>
+
+                <ul class="price-notes">
+                    <li>Matrícula: 60 € (equipación de juego y de entrenamiento incluidas).</li>
+                    <li>Hermanos: 10 % de descuento en la segunda cuota y siguientes.</li>
+                    <li>Primera clase de prueba gratis, sin compromiso.</li>
+                </ul>
+
+            </div>
+        </section>
+
+        <!-- ===========================
+             EL CLUB
+        ============================ -->
+        <section class="section section-dark" id="club">
+            <div class="container club">
+
+                <img src="img/equipo.webp" alt="Una jugadora con el número 15 sentada en el banquillo con el balón entre las manos"
+                    class="club-photo" width="900" height="1350" loading="lazy">
+
+                <div class="club-text">
+                    <p class="eyebrow">El club</p>
+                    <h2 class="section-title">Más que un deporte</h2>
+                    <p>
+                        Volaris nació en 2009 con un equipo y doce jugadoras. Hoy somos más de 300, pero
+                        seguimos creyendo lo mismo: el voleibol se aprende en equipo y forma personas, no solo
+                        deportistas.
+                    </p>
+
+                    <ul class="values">
+                        <li><strong>Superación.</strong> Cada entrenamiento es una oportunidad para mejorar.</li>
+                        <li><strong>Equipo.</strong> Nadie gana un punto solo.</li>
+                        <li><strong>Pasión.</strong> Jugamos con energía y con ganas.</li>
+                        <li><strong>Crecimiento.</strong> Aprendemos a confiar, a liderar y a disfrutar.</li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <!-- Logros: antes estaban escondidos, ahora tienen su propio sitio -->
+            <div class="container">
+                <h3 class="achievements-title">Nuestros logros</h3>
+                <ol class="achievements">
+                    <li><span>2019</span> Campeonas autonómicas cadete</li>
+                    <li><span>2022</span> Ascenso del sénior femenino a Primera Nacional</li>
+                    <li><span>2024</span> Subcampeonas del Torneo Internacional Costa Atlántica</li>
+                    <li><span>2025</span> Bronce en el Campeonato de España juvenil</li>
+                </ol>
+            </div>
+        </section>
+
+        <!-- ===========================
+             CAMPUS DE VERANO
+        ============================ -->
+        <section class="camp">
+            <div class="container camp-inner">
+                <div>
+                    <p class="eyebrow">Campus de verano 2027</p>
+                    <h2 class="section-title">Del 28 de junio al 16 de julio</h2>
+                    <p>
+                        Tres semanas de voley, piscina y actividades para jugadores de 8 a 17 años, sean o no
+                        del club. Semanas sueltas desde 120 €.
+                    </p>
+                </div>
+                <a href="#contacto" class="btn btn-dark">Quiero información</a>
+            </div>
+        </section>
+
+        <!-- ===========================
+             INSCRIPCIÓN
+        ============================ -->
+        <section class="section" id="inscripcion">
+            <div class="container">
+
+                <p class="eyebrow">Inscripción</p>
+                <h2 class="section-title">Apúntate en 3 pasos</h2>
+
+                <ol class="steps">
+                    <li>
+                        <h3>Prueba una clase</h3>
+                        <p>Escríbenos y te reservamos una clase gratis en su categoría.</p>
+                    </li>
+                    <li>
+                        <h3>Rellena la ficha</h3>
+                        <p>Datos del jugador, autorización y una foto. Te la enviamos por correo.</p>
+                    </li>
+                    <li>
+                        <h3>Paga la matrícula</h3>
+                        <p>Por transferencia o con tarjeta. Te damos la equipación el primer día.</p>
+                    </li>
+                </ol>
+
+                <h3 class="faq-title">Preguntas frecuentes</h3>
+
+                <!-- <details> ya se abre y se cierra solo, sin JavaScript, y funciona con teclado -->
+                <div class="faq">
+                    <details>
+                        <summary>¿Hace falta haber jugado antes?</summary>
+                        <p>No. En la escuela y en los primeros equipos de cada categoría empezamos desde cero.</p>
+                    </details>
+                    <details>
+                        <summary>¿Puedo apuntarme a mitad de temporada?</summary>
+                        <p>Sí, mientras queden plazas en su categoría. La cuota empieza a contar el mes en que entra.</p>
+                    </details>
+                    <details>
+                        <summary>¿Qué necesita traer el primer día?</summary>
+                        <p>Ropa deportiva, zapatillas de interior, agua y rodilleras si las tiene. Las prestamos si no.</p>
+                    </details>
+                    <details>
+                        <summary>¿Hay equipos masculinos?</summary>
+                        <p>Sí. Tenemos equipos masculinos de infantil a sénior y la escuela es mixta.</p>
+                    </details>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ===========================
+             CONTACTO
+        ============================ -->
+        <section class="section section-light" id="contacto">
+            <div class="container contact">
+
+                <div>
+                    <p class="eyebrow">Contacto</p>
+                    <h2 class="section-title">¿Hablamos?</h2>
+                    <ul class="contact-data">
+                        <li><a href="mailto:hola@volarisvolleyball.es">hola@volarisvolleyball.es</a></li>
+                        <li><a href="tel:+34600123456">600 123 456</a> · de lunes a viernes, de 17:00 a 20:00</li>
+                        <li><a href="#" rel="noopener">Instagram @volarisvolley</a></li>
+                    </ul>
+                </div>
+
+                <form class="contact-form" id="contact-form" novalidate>
+                    <label for="name">Nombre</label>
+                    <input type="text" id="name" name="name" autocomplete="name" required>
+
+                    <label for="email">Correo electrónico</label>
+                    <input type="email" id="email" name="email" autocomplete="email" required>
+
+                    <label for="message">¿En qué te ayudamos?</label>
+                    <textarea id="message" name="message" rows="4"></textarea>
+
+                    <button type="submit" class="btn">Enviar</button>
+                    <p class="form-status" id="form-status" aria-live="polite"></p>
+                </form>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ===========================
+         PIE
+    ============================ -->
+    <footer class="footer">
+        <div class="container">
+            <p>© 2026 Volaris Volleyball</p>
+            <p>Club ficticio: proyecto de diseño y desarrollo de Celia Rubio.</p>
+        </div>
+    </footer>
+
+    <script src="main.js"></script>
 </body>
 
 </html>
